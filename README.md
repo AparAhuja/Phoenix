@@ -1,5 +1,5 @@
 # Phoenix : Microbial Growth Simulation Platform
-Phoenix is simulation platform to study microbial growth.<br>
+Phoenix is currently being used as a tool for game theoretic ananlysis of microbial growth.<br>
 
 ## Dependencies
 
