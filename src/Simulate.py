@@ -9,6 +9,7 @@ class Simulate():
 		self.config_obj   = config_obj
 		self.stats        = stats
 		self.current_time_step = 0
+
 	def onStartSimulation(self):
 
 		# Intitialize state list

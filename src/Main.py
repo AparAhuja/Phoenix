@@ -14,6 +14,10 @@ def get_example_path():
     return sys.argv[1]
 
 def get_config_path(path):
+    '''if not osp.isfile(path):
+        print(path)
+        print("Example folder not found !")
+        exit()'''
     config_filepath=osp.join(path,'config.txt')
     return config_filepath
 
