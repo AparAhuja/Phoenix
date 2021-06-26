@@ -14,12 +14,12 @@ def get_example_path():
     return sys.argv[1]
 
 def get_config_path(path):
-    '''if not osp.isfile(path):
-        print(path)
-        print("Example folder not found !")
-        exit()'''
-    config_filepath=osp.join(path,'config.txt')
-    return config_filepath
+    if osp.isdir(path):
+        config_filepath=osp.join(path,'config.txt')
+        return config_filepath
+    else:
+        print("ERROR: \"" + path + "\" folder not found!")
+        exit()
 
 def get_model(example_path):
     UserModel = module_from_file("Generate_model", osp.join(example_path,'UserModel.py'))

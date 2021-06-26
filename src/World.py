@@ -10,7 +10,7 @@ class World():
         self.model      = model
         self.agents_obj = None
 
-    def one_world(self, stats):
+    def one_world(self, stats, world_number):
         time_steps = self.config_obj.time_steps
 
         # Initialize agents
@@ -19,17 +19,18 @@ class World():
         # Intialize resource grid
         resource_obj = ReadFile.ReadResource(self.config_obj)
 
-        sim_obj = Simulate.Simulate(self.config_obj, self.model, self.agents_obj, resource_obj, stats)
+        sim_obj = Simulate.Simulate(self.config_obj, self.model, self.agents_obj, resource_obj, stats, world_number)
         sim_obj.onStartSimulation()
 
         if(stats):
             statFile = open(self.config_obj.example_path + '/Statistics.txt', 'a')
-            statFile.write('\n' + 'Initial Resource Grid' + '\n')
-            for row in resource_obj.resource_grid:
-                for x in row:
-                    statFile.write(str(x) + ' ')
-                statFile.write('\n')
-            statFile.write('\n' + 'All Time Step Stats')
+            if(world_number == 0):
+                statFile.write('\n' + 'Initial Resource Grid' + '\n')
+                for row in resource_obj.resource_grid:
+                    for x in row:
+                        statFile.write(str(x) + ' ')
+                    statFile.write('\n')
+            statFile.write('\nAll Time Step Stats | World Number - ' + str(world_number + 1))
             statFile.close()
 
         # Simulation Loop
@@ -57,7 +58,7 @@ class World():
             tdict[state] = [0]*(self.config_obj.time_steps+1)
 
         for i in range(self.config_obj.worlds):
-            sdict = self.one_world(stats)
+            sdict = self.one_world(stats, i)
             for state in self.model.individual_state_types:
                 for j in range(len(tdict[state])):
                     tdict[state][j] += sdict[state][j]

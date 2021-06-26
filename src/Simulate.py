@@ -2,12 +2,13 @@ import Agent
 import random
 
 class Simulate():
-	def __init__(self, config_obj, model, agents_obj, resource_obj, stats):
+	def __init__(self, config_obj, model, agents_obj, resource_obj, stats, world_number):
 		self.agents_obj   = agents_obj
 		self.resource_obj = resource_obj
 		self.model        = model
 		self.config_obj   = config_obj
 		self.stats        = stats
+		self.world_number = world_number
 		self.current_time_step = 0
 
 	def onStartSimulation(self):
@@ -85,11 +86,12 @@ class Simulate():
 		if(self.stats):
 			statFile = open(self.config_obj.example_path + '/Statistics.txt', 'a')
 			if start:
-				statFile.write('Initial Microbe Distribution: ' + '\n')
-				for state in self.state_list:
-					statFile.write('\t' + state + ': ' + str(self.state_list[state]) + '\n')
+				if self.world_number == 0:
+					statFile.write('\nInitial Microbe Distribution: \n')
+					for state in self.state_list:
+						statFile.write('\t' + state + ': ' + str(self.state_list[state]) + '\n')
 			else:
-				statFile.write('\n' + 'Time Step: ' + str(self.current_time_step + 1) + '\n')
+				statFile.write('\nTime Step: ' + str(self.current_time_step + 1) + '\n')
 				for state in self.state_list:
 					statFile.write('\t' + state + ': ' + str(self.state_list[state]) + '\n')
 			statFile.close()
