@@ -73,7 +73,7 @@ class ReadAgents(BaseReadFile):
 		last_line = 0, "EMPTY_LINE"
 		try:
 			for i,key in enumerate(self.parameter_keys):
-				info_dict[key] = info_list[i]
+				info_dict[key] = info_list[i].strip().lstrip()
 				last_line = ':'.join(info_list)
 		except:
 			print("ERROR: Missing parameters in agents file at line number " + str(line_number) + ": \'" + last_line + "\' !")
