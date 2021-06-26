@@ -12,6 +12,8 @@
 >Number of Time Steps <*number_of_time_steps*><br>
 >Initial Agents Filename <*agents.txt*><br>
 >Initial Resource Filename <*resource.txt*><br>
+>Initial Enzyme Filename <*enzyme.txt*><br>
+
 
 ### 2. *UserModel.py*
 ```python
@@ -20,12 +22,13 @@ import Model
 class UserModel(Model.ScheduledModel):
 	def __init__(self):
 		super(UserModel, self).__init__()
-		self.resource_production_fn = lambda x : 1 
-		# Format - self.insert_state(name, resource_consumption_fn, atp_production_fn, division_age, min_atp_req_to_divide, no_of_div_before_death)
+		self.resource_production_fn = lambda x, y, z : 1 
+		# Format - self.insert_state(name, resource_consumption_fn, atp_production_fn, enzyme_production_fn, enzyme_consumption_fn, \
+			   division_age, min_atp_req_to_divide, no_of_div_before_death)
 			 # provide the tuple (mean, std_dev) for division_age, min_atp_req_to_divide, no_of_div_before_death.
 		# Example -
-		self.insert_state( "Cooperator", lambda x : 1, lambda x : 2, (4, 1), (3, 1), (5, 3) )
-		self.insert_state(  "Defector" , lambda x : 2, lambda x : 2, (3, 1), (5, 2), (6, 2) )
+		self.insert_state( "Cooperator", lambda x, y : 1, lambda x : 2, lambda x : 0, lambda x : 0, (4, 1), (3, 1), (5, 3) )
+		self.insert_state(  "Defector" , lambda x, y : 2, lambda x : 2, lambda x : 0, lambda x : 0, (3, 1), (5, 2), (6, 2) )
 ```
 
 ### 3. *agents.txt*
