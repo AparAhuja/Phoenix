@@ -25,7 +25,7 @@ class UserModel(Model.ScheduledModel):
 			 # provide the tuple (mean, std_dev) for division_age, min_atp_req_to_divide, no_of_div_before_death.
 		# Example -
 		self.insert_state( "Cooperator", lambda x : 1, lambda x : 2, (4, 1), (3, 1), (5, 3) )
-		self.insert_state( "Defector"  , lambda x : 2, lambda x : 2, (3, 1), (5, 2), (6, 2) )
+		self.insert_state(  "Defector" , lambda x : 2, lambda x : 2, (3, 1), (5, 2), (6, 2) )
 ```
 
 ### 3. *agents.txt*
