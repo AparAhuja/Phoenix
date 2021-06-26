@@ -33,8 +33,8 @@ class ScheduledModel():
 			mean = self.state_food_mean[state]; vary = self.state_food_vary[state];
 			agent.food_req = random.randint(mean - vary, mean + vary)
 
-			mean = self.state_food_mean[state]; vary = self.state_food_vary[state]
+			mean = self.state_noOfDiv_mean[state]; vary = self.state_noOfDiv_vary[state]
 			agent.max_div  = random.randint(mean - vary, mean + vary)
 
-			mean = self.state_food_mean[state]; vary = self.state_food_vary[state]
+			mean = self.state_divideAge_mean[state]; vary = self.state_divideAge_vary[state]
 			agent.div_age  = random.randint(mean - vary, mean + vary)

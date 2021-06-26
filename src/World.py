@@ -89,13 +89,16 @@ class World():
             plt.show()
 
         # Spread in Grid
+        agent_locations = {}
+        for agent in self.agents_obj.agents.values():
+            agent_locations[agent.type] = (agent_locations.get(agent.type, [])) + [(agent.x, agent.y)]
+
         for state in self.model.individual_state_types:
             data = np.zeros((self.config_obj.grid_size, self.config_obj.grid_size, 3), dtype=np.uint8)
-            max_for_state = -1
-            for agent in self.agents_obj.agents.values():
-                if agent.type == state:
-                    data[agent.x, agent.y, 0] += 1
-                    max_for_state = max(max_for_state, data[agent.x, agent.y, 0])
+            max_for_state = 0
+            for loc in agent_locations.get(state, []):
+                data[loc[0], loc[1], 0] += 1
+                max_for_state = max(max_for_state, data[loc[0], loc[1], 0])
             for i in range(self.config_obj.grid_size):
                 for j in range(self.config_obj.grid_size):
                     data[i, j, 0] *= 255/max_for_state

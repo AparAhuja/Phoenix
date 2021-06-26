@@ -32,14 +32,19 @@ class Simulate():
 
 	def onStartTimeStep(self, current_time_step):
 		self.current_time_step = current_time_step
-		resource_grid          = self.resource_obj.resource_grid
+		r_obj                  = self.resource_obj
 		model                  = self.model
-		new_agents             = {}
+		new_agents             = dict([(agent.index, agent) for agent in self.agents_obj.agentsAt.get(current_time_step+1, [])])
 		dead_agents            = []
 		free_index             = len(self.agents_obj.agents)
 
 		agents_list = list(self.agents_obj.agents.values())
 		random.shuffle(agents_list)
+
+		# add resource
+		for x in range(self.config_obj.grid_size):
+			for y in range(self.config_obj.grid_size):
+				r_obj.resource_grid[x][y] += model.resource_production_fn(x, y, current_time_step)
 
 		for agent in agents_list:
 			# increase age by 1
@@ -47,9 +52,9 @@ class Simulate():
 
 			# consume food
 			x = agent.x; y = agent.y; atype = agent.type
-			resource_consumed    = min(resource_grid[x][y], model.consumption_fn[atype](x, y, current_time_step))
-			agent.atp           += model.production_fn[atype](resource_consumed)
-			resource_grid[x][y] -= resource_consumed
+			resource_consumed          = min(r_obj.resource_grid[x][y], model.consumption_fn[atype](x, y, r_obj.resource_grid))
+			agent.atp                 += model.production_fn[atype](resource_consumed)
+			r_obj.resource_grid[x][y] -= resource_consumed
 
 			# divide if divage crossed
 			if agent.age % agent.div_age == 0 and agent.atp >= agent.food_req:
@@ -58,6 +63,7 @@ class Simulate():
 				new_agents[free_index] = Agent.Agent(free_index, new_info_dict)
 				free_index += 1
 				agent.div  += 1
+				agent.atp   = 0
 
 			# die if max_no_of_div crossed
 			if agent.div >= agent.max_div:
@@ -87,7 +93,7 @@ class Simulate():
 			statFile = open(self.config_obj.example_path + '/Statistics.txt', 'a')
 			if start:
 				if self.world_number == 0:
-					statFile.write('\nInitial Microbe Distribution: \n')
+					statFile.write('\nInitial Microbe Distribution\n')
 					for state in self.state_list:
 						statFile.write('\t' + state + ': ' + str(self.state_list[state]) + '\n')
 			else:
