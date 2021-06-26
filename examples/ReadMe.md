@@ -24,7 +24,7 @@ class UserModel(Model.ScheduledModel):
 		# Format - self.insert_state(name, resource_consumption_fn, atp_production_fn, division_age, min_atp_req_to_divide, no_of_div_before_death)
 			 # provide the tuple (mean, std_dev) for division_age, min_atp_req_to_divide, no_of_div_before_death.
 		# Example -
-		self.insert_state( "Cooperator", lambda x : 1, lambda x : 1, (4, 1), (3, 1), (5,3) )
+		self.insert_state( "Cooperator", lambda x : 1, lambda x : 1, (4, 1), (3, 1), (5, 3) )
 ```
 
 ### 3. *agents.txt*
