@@ -50,7 +50,7 @@ class ReadAgents(BaseReadFile):
 		except:
 			self.FileNotFound(self.filename)
 		agent_info_keys = self.get_value(f.readline())
-		self.parameter_keys=agent_info_keys.split(':')
+		self.parameter_keys = [key.strip().lstrip() for key in agent_info_keys.split(':')]
 		self.agents   = {}
 		self.agentsAt = {}
 		index = 0
