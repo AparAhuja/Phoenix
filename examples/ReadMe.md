@@ -46,3 +46,10 @@ class UserModel(Model.ScheduledModel):
 >0 2 0 2 0<br>
 >2 0 0 0 2<br>
 
+### 5. *enzyme.txt* (optional)
+>2 0 0 0 2<br>
+>0 2 0 2 0<br>
+>0 0 5 0 0<br>
+>0 2 0 2 0<br>
+>2 0 0 0 2<br>
+
