@@ -11,7 +11,6 @@ Type the following commands in terminal and hit enter to run the code -
 	cd examples
 	python ../src/Main.py <Example_Name> -np -s
 
-
 > **NOTE** <br>
 >1. The arguments -np [*--noplot*] and -s [*--stats*] are optional.
 >2. Add *--noplot* if you don't wish to see the plot after the simulation.
