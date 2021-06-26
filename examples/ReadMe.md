@@ -5,6 +5,7 @@
 2. UserModel.py<br>
 3. agents.txt<br>
 4. resource.txt (optional)
+5. enzyme.txt   (optional)
 
 ### 1. *config.txt*
 >Grid Size <*grid_size*><br>
