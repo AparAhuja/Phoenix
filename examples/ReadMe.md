@@ -32,10 +32,10 @@ class UserModel(Model.ScheduledModel):
 ```
 
 ### 3. *agents.txt*
-><pre>Time Step : Type       : X : Y</pre>
+><pre>Time Step :    Type    : X : Y</pre>
 ><pre>    0     : Cooperator : 0 : 1</pre>
-><pre>    2     : Defector   : 3 : 4</pre>
-><pre>    5     : Defector   : 1 : 3</pre>
+><pre>    2     :  Defector  : 3 : 4</pre>
+><pre>    5     :  Defector  : 1 : 3</pre>
 ><pre>    1     : Cooperator : 2 : 1</pre>
 
 
