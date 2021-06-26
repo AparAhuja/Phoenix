@@ -24,7 +24,7 @@ class UserModel(Model.ScheduledModel):
 		super(UserModel, self).__init__()
 		self.resource_production_fn = lambda x, y, z : 1 
 		# Format - self.insert_state(name, resource_consumption_fn, atp_production_fn, enzyme_production_fn, enzyme_consumption_fn, \
-			   division_age, min_atp_req_to_divide, no_of_div_before_death)
+			 # division_age, min_atp_req_to_divide, no_of_div_before_death)
 			 # provide the tuple (mean, std_dev) for division_age, min_atp_req_to_divide, no_of_div_before_death.
 		# Example -
 		self.insert_state( "Cooperator", lambda x, y : 1, lambda x : 2, lambda x : 0, lambda x : 0, (4, 1), (3, 1), (5, 3) )
