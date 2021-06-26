@@ -1,0 +1,5 @@
+Grid Size <4>
+Number of Worlds <2>
+Number of Time Steps <10>
+Initial Agents Filename <agents.txt>
+Initial Resource Filename <>
