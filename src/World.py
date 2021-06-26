@@ -19,7 +19,10 @@ class World():
         # Intialize resource grid
         resource_obj = ReadFile.ReadResource(self.config_obj)
 
-        sim_obj = Simulate.Simulate(self.config_obj, self.model, self.agents_obj, resource_obj, stats, world_number)
+        # Initialize enzyme grid
+        enzyme_obj = ReadFile.ReadEnzyme(self.config_obj)
+
+        sim_obj = Simulate.Simulate(self.config_obj, self.model, self.agents_obj, resource_obj, enzyme_obj, stats, world_number)
         sim_obj.onStartSimulation()
 
         if(stats):
@@ -27,6 +30,11 @@ class World():
             if(world_number == 0):
                 statFile.write('\n' + 'Initial Resource Grid' + '\n')
                 for row in resource_obj.resource_grid:
+                    for x in row:
+                        statFile.write(str(x) + ' ')
+                    statFile.write('\n')
+                statFile.write('\n' + 'Initial Enzyme Grid' + '\n')
+                for row in enzyme_obj.enzyme_grid:
                     for x in row:
                         statFile.write(str(x) + ' ')
                     statFile.write('\n')

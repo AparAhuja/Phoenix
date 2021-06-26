@@ -30,6 +30,7 @@ class ReadConfiguration(BaseReadFile):
 		self.time_steps = (int)(self.get_value_config(f.readline()))
 		self.agent_filename = self.get_value_config(f.readline())
 		self.glucose_filename = self.get_value_config(f.readline())
+		self.enzyme_filename = self.get_value_config(f.readline())
 		self.example_path = example_path
 
 		f.close()
@@ -94,6 +95,26 @@ class ReadResource(BaseReadFile):
 			for i in range(n):
 				row_i = [int(x) for x in self.get_value(f.readline()).split()]
 				self.resource_grid[i] = row_i
+				if(len(row_i) != n):
+					print("ERROR: Resource initilization error. Please check your resource file!")
+					exit()
+			f.close()
+
+
+class ReadEnzyme(BaseReadFile):
+	def __init__(self, config_obj):
+		super().__init__()
+		filename = config_obj.enzyme_filename
+		n = config_obj.grid_size
+		self.enzyme_grid = [[0 for i in range(n)] for j in range(n)]
+		if(filename != ''):
+			try:
+				f = open(osp.join(config_obj.example_path, filename), 'r')
+			except:
+				self.FileNotFound(filename)
+			for i in range(n):
+				row_i = [int(x) for x in self.get_value(f.readline()).split()]
+				self.enzyme_grid[i] = row_i
 				if(len(row_i) != n):
 					print("ERROR: Resource initilization error. Please check your resource file!")
 					exit()

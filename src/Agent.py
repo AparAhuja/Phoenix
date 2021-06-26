@@ -7,6 +7,7 @@ class Agent():
 		self.age      = 0
 		self.atp      = 0
 		self.div      = 0
+		self.enzyme   = 0
 		self.x        = int(info_dict['X'])
 		self.y        = int(info_dict['Y'])
 		self.type     = info_dict['Type']

@@ -2,13 +2,14 @@ import Agent
 import random
 
 class Simulate():
-	def __init__(self, config_obj, model, agents_obj, resource_obj, stats, world_number):
+	def __init__(self, config_obj, model, agents_obj, resource_obj, enzyme_obj, stats, world_number):
 		self.agents_obj   = agents_obj
 		self.resource_obj = resource_obj
 		self.model        = model
 		self.config_obj   = config_obj
 		self.stats        = stats
 		self.world_number = world_number
+		self.enzyme_obj   = enzyme_obj
 		self.current_time_step = 0
 
 	def onStartSimulation(self):
@@ -33,6 +34,7 @@ class Simulate():
 	def onStartTimeStep(self, current_time_step):
 		self.current_time_step = current_time_step
 		r_obj                  = self.resource_obj
+		e_obj                  = self.enzyme_obj
 		model                  = self.model
 		new_agents             = dict([(agent.index, agent) for agent in self.agents_obj.agentsAt.get(current_time_step+1, [])])
 		dead_agents            = []
@@ -47,16 +49,27 @@ class Simulate():
 				r_obj.resource_grid[x][y] += model.resource_production_fn(x, y, current_time_step)
 
 		for agent in agents_list:
+			x = agent.x;  y = agent.y;  atype = agent.type
+
 			# increase age by 1
 			agent.age += 1
 
-			# consume food
-			x = agent.x; y = agent.y; atype = agent.type
-			resource_consumed          = min(r_obj.resource_grid[x][y], model.consumption_fn[atype](x, y, r_obj.resource_grid))
-			agent.atp                 += model.production_fn[atype](resource_consumed)
-			r_obj.resource_grid[x][y] -= resource_consumed
+			# produce enzyme
+			e_obj.enzyme_grid[x][y] += model.enzyme_production_fn[atype](r_obj.resource_grid[x][y])
 
-			# divide if divage crossed
+			# consume enzyme
+			enzyme_consumed          = min(e_obj.enzyme_grid[x][y], model.enzyme_consumption_fn[atype](e_obj.enzyme_grid[x][y]))
+			e_obj.enzyme_grid[x][y] -= enzyme_consumed
+			agent.enzyme            += enzyme_consumed
+
+			# consume resource and utilize enzyme
+			resource_consumed = min(r_obj.resource_grid[x][y], model.consumption_fn[atype](r_obj.resource_grid[x][y], agent.enzyme))
+				# take one-forth of resource as enzyme consumption within the cell
+			agent.enzyme              -= min(agent.enzyme, resource_consumed // 4)
+			r_obj.resource_grid[x][y] -= resource_consumed
+			agent.atp                 += model.production_fn[atype](resource_consumed)
+
+			# divide if div_age crossed
 			if agent.age % agent.div_age == 0 and agent.atp >= agent.food_req:
 				new_x, new_y  = agent.find_division_loc(x, y, self.config_obj.grid_size)
 				new_info_dict = {'X': new_x, 'Y': new_y, 'Type': agent.type}
