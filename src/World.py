@@ -90,17 +90,17 @@ class World():
             plt.show()
         if anim:
             fig = plt.figure()
-            plt.title('Simulation Plot')
-            plt.legend(list(tdict.keys()), loc='upper left', shadow=True)
-            plt.ylabel('Number of Microbes in Grid')
-            plt.xlabel('Time Steps (in unit steps)')
-            plt.grid(b=True, which='major', color='#666666', linestyle='-')
-            plt.minorticks_on()
-            plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
             def buildmebarchart(i=int):
-                plt.legend(tdict.keys())
+                plt.clf()
+                plt.title('Simulation Plot')
+                plt.ylabel('Number of Microbes in Grid')
+                plt.xlabel('Time Steps (in unit steps)')
+                plt.grid(b=True, which='major', color='#666666', linestyle='-')
+                plt.minorticks_on()
+                plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
                 for state in tdict.keys():
-                    plt.plot(tdict[state][:i])
+                    plt.plot(tdict[state][:i], label = state)
+                plt.legend(loc='upper left', shadow=True)
             animator = ani.FuncAnimation(fig, buildmebarchart, interval=150)
             animator.save(self.config_obj.example_path + '/results.gif')
 
