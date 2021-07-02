@@ -36,7 +36,7 @@ class Simulate():
 		model                  = self.model
 		new_agents             = dict([(agent.index, agent) for agent in self.agents_obj.agentsAt.get(current_time_step+1, [])])
 		dead_agents            = []
-		free_index             = len(self.agents_obj.agents)
+		free_index             = max(self.agents_obj.agents.keys()) + 1
 
 		agents_list = list(self.agents_obj.agents.values())
 		random.shuffle(agents_list)
@@ -68,7 +68,6 @@ class Simulate():
 			# die if max_no_of_div crossed
 			if agent.div >= agent.max_div:
 				dead_agents.append(agent.index)
-
 		model.initialize_states(new_agents)
 		for key in dead_agents:
 			self.agents_obj.agents.pop(key)

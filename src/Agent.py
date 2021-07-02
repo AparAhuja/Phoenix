@@ -10,7 +10,9 @@ class Agent():
 		self.x        = int(info_dict['X'])
 		self.y        = int(info_dict['Y'])
 		self.type     = info_dict['Type']
-		self.food_req = self.max_div = self.div_age = None
+		self.food_req = None
+		self.max_div  = None
+		self.div_age  = None
 
 	def find_division_loc(self, x, y, n):
 		r1 = random.randint(-1, 1)
