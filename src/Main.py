@@ -33,7 +33,7 @@ if __name__=="__main__":
     arg_parser.add_argument("Example_Name")
     arg_parser.add_argument("-np", "--noplot", help="doesn't show plot after simulation", required = False, action = "store_true")
     arg_parser.add_argument("-s" , "--stats" , help="creates Statistics.txt file in the example folder", required = False, action = "store_true")
-    arg_parser.add_argument("-r", "--resource", help="creates ResourceStats.txt file in the example folder", required=False, action="store_true")
+    arg_parser.add_argument("-r", "--resource_stats", help="creates ResourceStats.txt file in the example folder", required=False, action="store_true")
     arg_parser.add_argument("-a", "--animate", help="creates gif animation in the example folder", required=False, action="store_true")
     args = arg_parser.parse_args()
 
@@ -50,7 +50,7 @@ if __name__=="__main__":
     stats = args.stats
     plot  = not args.noplot
     anim  = args.animate
-    res   = args.resource
+    res   = args.resource_stats
 
     # Read Config File
     config_obj = ReadFile.ReadConfiguration(config_filename, example_path)
