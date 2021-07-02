@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib.animation as ani
 from PIL import Image
 import numpy as np
 import Simulate
@@ -51,7 +52,7 @@ class World():
         return tdict
 
     # Averages multiple simulations and plots a single plot
-    def simulate_worlds(self, plot, stats):
+    def simulate_worlds(self, plot, stats, anim):
 
         tdict = {}
         for state in self.model.individual_state_types:
@@ -74,10 +75,10 @@ class World():
             statFile.close()
 
         # Plotting
-        for state in tdict.keys():
+        for state in tdict:
             plt.plot(tdict[state])
         plt.title('Simulation Plot')
-        plt.legend(list(tdict.keys()), loc='upper right', shadow=True)
+        plt.legend(list(tdict.keys()), loc='upper left', shadow=True)
         plt.ylabel('Number of Microbes in Grid')
         plt.xlabel('Time Steps (in unit steps)')
         plt.grid(b=True, which='major', color='#666666', linestyle='-')
@@ -87,6 +88,21 @@ class World():
         fig1.savefig(self.config_obj.example_path + '/results.jpg')
         if(plot):
             plt.show()
+        if anim:
+            fig = plt.figure()
+            plt.title('Simulation Plot')
+            plt.legend(list(tdict.keys()), loc='upper left', shadow=True)
+            plt.ylabel('Number of Microbes in Grid')
+            plt.xlabel('Time Steps (in unit steps)')
+            plt.grid(b=True, which='major', color='#666666', linestyle='-')
+            plt.minorticks_on()
+            plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.2)
+            def buildmebarchart(i=int):
+                plt.legend(tdict.keys())
+                for state in tdict.keys():
+                    plt.plot(tdict[state][:i])
+            animator = ani.FuncAnimation(fig, buildmebarchart, interval=150)
+            animator.save(self.config_obj.example_path + '/results.gif')
 
         # Spread in Grid
         agent_locations = {}
