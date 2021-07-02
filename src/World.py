@@ -115,9 +115,10 @@ class World():
             for loc in agent_locations.get(state, []):
                 data[loc[0], loc[1], 0] += 1
                 max_for_state = max(max_for_state, data[loc[0], loc[1], 0])
-            for i in range(self.config_obj.grid_size):
-                for j in range(self.config_obj.grid_size):
-                    data[i, j, 0] *= 255/max_for_state
+            if max_for_state != 0:
+                for i in range(self.config_obj.grid_size):
+                    for j in range(self.config_obj.grid_size):
+                        data[i, j, 0] *= 255/max_for_state
             img = Image.fromarray(data, 'RGB')
             img = img.resize((1600,1600))
             img.save(self.config_obj.example_path + '/Distribution_of_' + state + '.png')
