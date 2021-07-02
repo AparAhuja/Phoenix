@@ -2,12 +2,13 @@ import Agent
 import random
 
 class Simulate():
-	def __init__(self, config_obj, model, agents_obj, resource_obj, stats, world_number):
+	def __init__(self, config_obj, model, agents_obj, resource_obj, stats, res, world_number):
 		self.agents_obj   = agents_obj
 		self.resource_obj = resource_obj
 		self.model        = model
 		self.config_obj   = config_obj
 		self.stats        = stats
+		self.res          = res
 		self.world_number = world_number
 		self.current_time_step = 0
 
@@ -45,6 +46,10 @@ class Simulate():
 		for x in range(self.config_obj.grid_size):
 			for y in range(self.config_obj.grid_size):
 				r_obj.resource_grid[x][y] += model.resource_production_fn(x, y, current_time_step)
+
+		# save resource grid info
+		if self.res:
+			self.save_grid()
 
 		for agent in agents_list:
 			# increase age by 1
@@ -102,3 +107,11 @@ class Simulate():
 			statFile.close()
 		for state in self.state_history.keys():
 			self.state_history[state].append(len(self.state_list[state]))
+
+	def save_grid(self):
+		resFile = open(self.config_obj.example_path + '/ResourceStats.txt', 'a')
+		resFile.write('Time Step: ' + str(self.current_time_step + 1) + '\n')
+		for row in self.resource_obj.resource_grid:
+			resFile.write(str(row) + '\n')
+		resFile.write('\n\n')
+		resFile.close()

@@ -32,7 +32,8 @@ if __name__=="__main__":
     # input argument options
     arg_parser.add_argument("Example_Name")
     arg_parser.add_argument("-np", "--noplot", help="doesn't show plot after simulation", required = False, action = "store_true")
-    arg_parser.add_argument("-s" , "--stats" , help="creates statistics.txt file in the example folder", required = False, action = "store_true")
+    arg_parser.add_argument("-s" , "--stats" , help="creates Statistics.txt file in the example folder", required = False, action = "store_true")
+    arg_parser.add_argument("-r", "--resource", help="creates ResourceStats.txt file in the example folder", required=False, action="store_true")
     arg_parser.add_argument("-a", "--animate", help="creates gif animation in the example folder", required=False, action="store_true")
     args = arg_parser.parse_args()
 
@@ -41,10 +42,15 @@ if __name__=="__main__":
 
     if osp.isfile(example_path + '/Statistics.txt'):
         os.remove(example_path + '/Statistics.txt')
+    if osp.isfile(example_path + '/ResourceStats.txt'):
+        os.remove(example_path + '/ResourceStats.txt')
+    if osp.isfile(example_path + '/results.gif'):
+        os.remove(example_path + '/results.gif')
 
     stats = args.stats
-    plot = not args.noplot
-    anim = args.animate
+    plot  = not args.noplot
+    anim  = args.animate
+    res   = args.resource
 
     # Read Config File
     config_obj = ReadFile.ReadConfiguration(config_filename, example_path)
@@ -55,4 +61,4 @@ if __name__=="__main__":
     # Creation of World object
     world_obj = World.World(config_obj, model)
     # Simulate Worlds
-    world_obj.simulate_worlds(plot, stats, anim)
+    world_obj.simulate_worlds(plot, stats, anim, res)

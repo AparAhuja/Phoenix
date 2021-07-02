@@ -11,7 +11,7 @@ class World():
         self.model      = model
         self.agents_obj = None
 
-    def one_world(self, stats, world_number):
+    def one_world(self, stats, res, world_number):
         time_steps = self.config_obj.time_steps
 
         # Initialize agents
@@ -20,7 +20,7 @@ class World():
         # Intialize resource grid
         resource_obj = ReadFile.ReadResource(self.config_obj)
 
-        sim_obj = Simulate.Simulate(self.config_obj, self.model, self.agents_obj, resource_obj, stats, world_number)
+        sim_obj = Simulate.Simulate(self.config_obj, self.model, self.agents_obj, resource_obj, stats, res, world_number)
         sim_obj.onStartSimulation()
 
         if(stats):
@@ -52,14 +52,14 @@ class World():
         return tdict
 
     # Averages multiple simulations and plots a single plot
-    def simulate_worlds(self, plot, stats, anim):
+    def simulate_worlds(self, plot, stats, anim, res):
 
         tdict = {}
         for state in self.model.individual_state_types:
             tdict[state] = [0]*(self.config_obj.time_steps+1)
 
         for i in range(self.config_obj.worlds):
-            sdict = self.one_world(stats, i)
+            sdict = self.one_world(stats, res, i)
             for state in self.model.individual_state_types:
                 for j in range(len(tdict[state])):
                     tdict[state][j] += sdict[state][j]
