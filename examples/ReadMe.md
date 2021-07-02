@@ -13,6 +13,9 @@
 >Initial Agents Filename <*agents.txt*><br>
 >Initial Resource Filename <*resource.txt*><br>
 
+`To initialize whole grid with a single integer value, replace the resource.txt filename with an integer.`
+`Example: Initial Resource Filename <10>`
+
 ### 2. *UserModel.py*
 ```python
 import Model
@@ -29,11 +32,11 @@ class UserModel(Model.ScheduledModel):
 ```
 
 ### 3. *agents.txt*
-><pre>Time Step : Type       : X : Y</pre>
-><pre>    0     : Cooperator : 0 : 1</pre>
-><pre>    2     : Defector   : 3 : 4</pre>
-><pre>    5     : Defector   : 1 : 3</pre>
-><pre>    1     : Cooperator : 2 : 1</pre>
+>Time Step : Type       : X : Y<br>
+>    0     : Cooperator : 0 : 1<br>
+>    2     : Defector   : 3 : 4<br>
+>    5     : Defector   : 1 : 3<br>
+>    1     : Cooperator : 2 : 1
 
 
 ### 4. *resource.txt* (optional)
