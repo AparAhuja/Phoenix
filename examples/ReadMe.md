@@ -13,8 +13,8 @@
 >Initial Agents Filename <*agents.txt*><br>
 >Initial Resource Filename <*resource.txt*><br>
 
-`To initialize whole grid with a single integer value, replace the resource.txt filename with an integer.`
-`Example: Initial Resource Filename <10>`
+`To initialize whole grid with a single integer value, replace the resource.txt filename with an integer.`<br>
+`Example: Initial Resource Filename <10>. Note that an empty resource filename initializes grid to 0.`
 
 ### 2. *UserModel.py*
 ```python
