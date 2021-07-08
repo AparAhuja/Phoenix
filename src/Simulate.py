@@ -1,5 +1,6 @@
 import Agent
 import random
+from Utility import stat
 
 class Simulate():
 	def __init__(self, config_obj, model, agents_obj, resource_obj, stats, res, world_number):
@@ -48,9 +49,8 @@ class Simulate():
 			for y in range(self.config_obj.grid_size):
 				r_obj.resource_grid[x][y] += model.resource_production_fn(x, y, current_time_step)
 
-		# save resource grid info
-		if self.res:
-			self.save_grid()
+		# save resource grid stats
+		stat.saveGrid(self.config_obj, self.resource_obj, current_time_step, self.res)
 
 		for agent in agents_list:
 			# increase age by 1
@@ -80,8 +80,6 @@ class Simulate():
 		self.agents_obj.agents.update(new_agents)
 
 	def handleTimeStepForAllAgents(self):
-		#Too ensure concurrency we update agent.next_state in method handleTimeStepAsAgent
-		#After every agent has updated next_state we update states of all agents in method handleTimeStep()
 		for state in self.state_list:
 			self.state_list[state] = []
 		for agent in self.agents_obj.agents.values():
@@ -94,22 +92,13 @@ class Simulate():
 		return self.state_history
 
 	def store_state(self, start = False):
-		if(self.stats):
-			statFile = open(self.config_obj.example_path + '/Statistics.txt', 'a')
-			if start:
-				if self.world_number == 0:
-					statFile.write('\nInitial Microbe Distribution\n')
-					for state in self.state_list:
-						statFile.write('\t' + state + ': ' + str(self.state_list[state]) + '\n')
-			else:
-				statFile.write('\nTime Step: ' + str(self.current_time_step + 1) + '\n')
-				for state in self.state_list:
-					statFile.write('\t' + state + ': ' + str(self.state_list[state]) + '\n')
-			statFile.close()
+		stat.saveTimeStep(self.config_obj, self.world_number, self.current_time_step, self.state_list, self.stats, start)
 		for state in self.state_history.keys():
 			self.state_history[state].append(len(self.state_list[state]))
 
 	def save_grid(self):
+		if not self.res:
+			return
 		resFile = open(self.config_obj.example_path + '/ResourceStats.txt', 'a')
 		resFile.write('Time Step: ' + str(self.current_time_step + 1) + '\n')
 		for row in self.resource_obj.resource_grid:
