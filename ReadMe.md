@@ -3,7 +3,7 @@ Phoenix is currently being used as a tool for game theoretic ananlysis of microb
 
 ## Dependencies
 
-To install dependencies using pipenv run ```pipenv install```.
+To install dependencies run ```pip install -r requirements.txt```.
 
 ## Running Examples
 Type the following commands in terminal and hit enter to run the code -
