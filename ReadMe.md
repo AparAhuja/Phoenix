@@ -1,5 +1,5 @@
 # Phoenix : Microbial Growth Simulation Platform
-Phoenix is currently being used as a tool for game theoretic ananlysis of microbial growth.<br>
+Phoenix is a general purpose microbial growth simulation platform and is built to handle a wide variety of biological phenomena. It’s main aim is to assist research in microbiology. But it can be developed into an educational tool as well. This might be useful in times when labs are inaccessible. Further, current research simulators use partial differentials for modelling which provides very limited scope for experimentation. Agent based simulators like Phoenix can provide a lot more flexibility and can handle almost any input.<br>
 
 ## Dependencies
 
