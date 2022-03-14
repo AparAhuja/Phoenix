@@ -11,6 +11,9 @@ Type the following commands in terminal and hit enter to run the code -
 	cd examples
 	python ../src/Main.py <Example_Name> -np -s -a -r
 
+## Applications in Microbiology
+A research project on application of game theory in microbiology was conducted at IIT Delhi was conducted under Prof. Shilpi Sharma. The project was awarded the Summer Undergraduate Research Award by Industrial Research and Development Unit, IIT Delhi. The project report can be viewed [here](https://drive.google.com/file/d/1Ls-RquYyFnVNwH7KZihNbkhcwbQtDmGw/view?usp=sharing).
+
 > **NOTE** <br>
 >1. The arguments -np [*--noplot*], -s [*--stats*], -r [*--resource_stats*] and -a [*--animation*] are optional.
 >2. Add *--noplot* if you don't wish to display the plot after the simulation. 
