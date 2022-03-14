@@ -11,9 +11,6 @@ Type the following commands in terminal and hit enter to run the code -
 	cd examples
 	python ../src/Main.py <Example_Name> -np -s -a -r
 
-## Applications in Microbiology
-A research project on application of game theory in microbiology was conducted at IIT Delhi was conducted under Prof. Shilpi Sharma. The project was awarded the Summer Undergraduate Research Award by Industrial Research and Development Unit, IIT Delhi. The project report can be viewed [here](https://drive.google.com/file/d/1Ls-RquYyFnVNwH7KZihNbkhcwbQtDmGw/view?usp=sharing).
-
 > **NOTE** <br>
 >1. The arguments -np [*--noplot*], -s [*--stats*], -r [*--resource_stats*] and -a [*--animation*] are optional.
 >2. Add *--noplot* if you don't wish to display the plot after the simulation. 
@@ -21,3 +18,6 @@ A research project on application of game theory in microbiology was conducted a
 >4. The *--animation* argument creates a *results.gif* file in the *Example_Name* folder.
 >5. The *--resource_stats* argument creates a *ResourceStats.txt* file in the *Example_Name* folder.
 >6. Images of grid distributions of all mircobes is saved in the *Example_Name* folder.
+
+## Applications in Microbiology
+A research project on application of game theory in microbiology was conducted at IIT Delhi was conducted under Prof. Shilpi Sharma. Pheonix was the primary simulation platform used for modelling. The project was awarded the Summer Undergraduate Research Award by Industrial Research and Development Unit, IIT Delhi. The project report can be viewed [here](https://drive.google.com/file/d/1Ls-RquYyFnVNwH7KZihNbkhcwbQtDmGw/view?usp=sharing).
