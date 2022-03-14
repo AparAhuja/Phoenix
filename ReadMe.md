@@ -20,4 +20,4 @@ Type the following commands in terminal and hit enter to run the code -
 >6. Images of grid distributions of all mircobes is saved in the *Example_Name* folder.
 
 ## Applications in Microbiology
-A research project on application of game theory in microbiology was conducted at IIT Delhi was conducted under Prof. Shilpi Sharma. Pheonix was the primary simulation platform used for modelling. The project was awarded the Summer Undergraduate Research Award by Industrial Research and Development Unit, IIT Delhi. The project report can be viewed [here](https://drive.google.com/file/d/1Ls-RquYyFnVNwH7KZihNbkhcwbQtDmGw/view?usp=sharing).
+A research project on application of evolutionary game theory in microbiology was conducted at IIT Delhi under Prof. Shilpi Sharma. Pheonix was used as the primary simulation platform for modelling. The project was awarded the Summer Undergraduate Research Award by Industrial Research and Development Unit, IIT Delhi. The project report can be viewed [here](https://drive.google.com/file/d/1Ls-RquYyFnVNwH7KZihNbkhcwbQtDmGw/view?usp=sharing).
